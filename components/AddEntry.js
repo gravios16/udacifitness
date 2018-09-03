@@ -16,6 +16,8 @@ import { addEntry } from '../actions'
 
 import { white, red, orange, blue, purple, pink } from '../utils/colors'
 
+import { NavigationActions } from 'react-navigation'
+
 function SubmitBtn ({ onPress }) {
   return (
     <TouchableOpacity
@@ -84,7 +86,7 @@ class AddEntry extends Component {
       eat: 0
     }))
 
-    //Navigate to Home
+    this.toHome()
 
     submitEntry({key, entry})
 
@@ -100,10 +102,16 @@ class AddEntry extends Component {
       [key]: getDailyReminderValue()
     }))
 
-    //Route to Home
+    this.toHome()
 
     removeEntry(key)
 
+  }
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({
+      key: 'AddEntry'
+    }))
   }
 
   render () {
